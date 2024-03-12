@@ -1,0 +1,731 @@
+//Aluno: Edinailton Klébio da Costa Ferreira
+//Curso: Sitemas para Internet - Tecnologia para Back-end II - P4B
+//Turno: Noite
+
+//1o Escrever um código que receba um número inteiro
+// e informe se ele é um número primo.
+
+package atividade01_exer01_a_05;
+import java.util.Scanner;
+
+
+public class Exercicio01 {
+    public boolean descobrirPrimo(int numero) {
+        if (numero < 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void result(int numero) {
+        if(numero < 1){
+            System.out.println("Numeros menor ou igual a zero não são primos!!! ");
+        }
+        else if(descobrirPrimo(numero)) {
+            System.out.println("O número "+numero+ " é primo! ");
+        }else {
+            System.out.println("O número "+ numero +" não é primo! " );
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Verificação de números primos!! ");
+        System.out.println("Digite um número maior que Zero: ");
+        int numero = sc.nextInt();
+
+        Exercicio01 exercicio01 = new Exercicio01();
+        exercicio01.result(numero);
+
+
+        sc.close();
+    }
+}
+
+
+//2o Escrever um código que sorteie um número randômico de 0 a 1000, peça um número inteiro
+//neste intervalo, se o usuário errar, informar se o valor sorteado é maior ou menor que o
+//informado e solicitar outro número do usuário até que ele acerte o número. Quando acertar,
+//informar a quantidade de palpites que ele informou até acertar.
+
+
+package atividade01_exer01_a_05;
+
+import java.util.Random;
+import java.util.Scanner;
+
+
+public class Exercicio02 {
+    public static int sorteioDoNumero() {
+        Random random = new Random();
+        int numeroSorteado = random.nextInt(1001);
+        return numeroSorteado;
+    }
+
+    public void descobrirNumero() {
+        Scanner sc = new Scanner(System.in);
+
+        int numeroSorteado = sorteioDoNumero();
+        System.out.println(numeroSorteado);
+
+        System.out.println("DIgite um número entre 0 e 1000: ");
+        int numeroEscolhido = sc.nextInt();
+
+        int i = 1;
+        while (numeroEscolhido != numeroSorteado) {
+            if (numeroEscolhido < 0 || numeroEscolhido > 1000) {
+                System.out.println("Valor fora dos padrões, digite um número entre (0 e 1000): ");
+            } else if (numeroEscolhido < numeroSorteado) {
+                System.out.println("Digite um valor mais ALTO: ");
+            } else {
+                System.out.println("Digite um valor mais BAIXO:  ");
+            }
+            numeroEscolhido = sc.nextInt();
+            i++;
+        }
+        if (i == 1) {
+            System.out.println("Número Sorteado: " + numeroSorteado +
+                    "\nNúmero escolhido " + numeroEscolhido +
+                    "\nIncrivel você acertou o número na primeira tentativa, " +
+                    "\nAbilidade Intuição aprimorada! + 10 pontos. hehe ");
+        } else if (numeroEscolhido == numeroSorteado) {
+            System.out.println("Parabêns você acertou o número Sorteado!!! ");
+            System.out.println("\nNúmero Sorteado: " + numeroSorteado +
+                    "\nSeu Número: " + numeroEscolhido +
+                    "\nTentativas: " + i);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Exercicio02 exercicio02 = new Exercicio02();
+        exercicio02.descobrirNumero();
+
+    }
+}
+
+
+//3o Escreva um código que receba um nome completo em forma de String e mostre as iniciais
+//do nome.
+//Ex.:
+//Entrada: Demetrius de Castro do Amaral
+//Saída: D.C.A
+
+package atividade01_exer01_a_05;
+
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+
+
+public class Exercicio03 {
+    public void abreviarNome() {
+        Scanner sc = new Scanner(System.in);
+
+        String nomeCompleto = sc.nextLine().trim();
+
+        String[] nomes = nomeCompleto.split(" ");
+        Set<String> palavrasExcluidas = new HashSet<>(Arrays.asList("a", "e", "da", "de", "do"));
+
+        System.out.println("Entrada: " + nomeCompleto.toUpperCase());
+        System.out.print("Saida: ");
+
+        int i = 0;
+        for (String nome : nomes) {
+            if (!nome.isEmpty() && !palavrasExcluidas.contains(nome.toLowerCase())) {
+                if( i > 0){
+                    System.out.print(". ");
+                }
+                System.out.print(nome.toUpperCase().charAt(0));
+                i ++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Exercicio03 exercicio03 = new Exercicio03();
+        exercicio03.abreviarNome();
+   }
+}
+
+
+
+//4o Escreva um código que receba uma String qualquer e a imprima de forma invertida.
+//Ex.:
+//Entrada: estude java
+//Saída: avaj edutse
+
+package atividade01_exer01_a_05;
+
+
+import java.util.Scanner;
+
+public class Exercicio04 {
+    public void palavraInvertida() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite um nome ou frase ");
+        String nome = sc.nextLine();
+        String invertido = " ";
+        for(int i = nome.length() - 1; i >= 0; i--)
+            invertido += nome.charAt(i);
+
+        System.out.println("Palavra normal: "+nome +
+                "\nPalavra invertida: "+invertido);
+    }
+
+    public static void main(String[] args) {
+
+        Exercicio04 exercicio04 = new Exercicio04();
+        exercicio04.palavraInvertida();
+    }
+}
+
+
+//5o Escreva um código que receba uma String simples (apenas uma palavra) e monte um array
+//com os valores respectivos a cada letra da palavra, os organize em ordem crescente, imprima
+//esse array e a palavra na nova ordem.
+//Ex.:
+//Entrada: estudar
+//Array: {5, 19, 20, 21, 4, 1, 18}
+//Array ordenado: {1, 4, 5, 18, 19, 20, 21}
+//Saída: aderstu.
+
+
+package atividade01_exer01_a_05;
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Exercicio05 {
+    private int[] posicaoDasLetras;
+    public void ondenandoValores() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite um nome qualquer: ");
+        String nome = sc.next();
+        posicaoDasLetras = new int[nome.length()];
+
+        for (int i = 0; i < nome.length(); i++) {
+            posicaoDasLetras[i] = nome.charAt(i) - 'a' + 1;
+        }
+
+    }
+    public void resultado() {
+        ondenandoValores();
+        System.out.println("Array: " + Arrays.toString(posicaoDasLetras));
+
+        Arrays.sort(posicaoDasLetras);
+
+        System.out.println("Array ordenado: " + Arrays.toString(posicaoDasLetras));
+
+        System.out.print("Saída: ");
+        for (int valor : posicaoDasLetras) {
+            char letra = (char) (valor + 'a' - 1);
+            System.out.print(letra);
+        }
+    }
+
+    public static void main(String[] args) {
+        Exercicio05 exercicio05 = new Exercicio05();
+        exercicio05.resultado();
+    }
+}
+
+
+//6o Escreva um código que tenha uma classe chamada Aluno, que receba três notas do tipo inteiro
+//e o nome do aluno do tipo String.
+//Pergunte ao usuário o nome do aluno e as três notas, continue pedindo alunos e notas até que o
+//usuário digite “sair” como nome do aluno.
+//Quando o usuário digitar “sair”, imprima a nota e média das notas de todos os alunos.
+//Imprimir a média geral da turma.
+//
+//Imprimir a quantidade de alunos reprovados e aprovado (média >= 6 aprovado).
+//Imprimir os nomes dos alunos aprovados
+//Imprimir os nomes dos alunos reprovados
+
+
+package atividade01_exercicio06.model;
+
+
+
+public class Aluno {
+
+    private String nome;
+    private int[] notas = new int[3];
+    private float media;
+    private boolean estado;
+
+    public Aluno(String nome, int[] notas, float media, boolean estado) {
+        this.nome = nome;
+        this.notas = notas;
+        this.media = media;
+        this.estado = estado;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int[] getNotas() {
+        return notas;
+    }
+
+    public void setNotas(int[] notas) {
+        this.notas = notas;
+    }
+
+    public float getMedia() {
+        return media;
+    }
+
+    public void setMedia(float media) {
+        this.media = media;
+    }
+    public boolean getEstado() {
+        return estado;
+    }
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+}
+
+
+package atividade01_exercicio06.service;
+
+import atividade01_exercicio06.model.Aluno;
+
+import java.util.List;
+
+
+public class ImprimirDadosDoALuno {
+    public void lerDadosDoAluno(List<Aluno> alunos) {
+        System.out.println("Boletim escolar do Aluno: ");
+        for (Aluno aluno : alunos) {
+            System.out.println("\nNome do aluno: " + aluno.getNome().toUpperCase());
+
+            int[] notas = aluno.getNotas();
+            for (int i = 0; i < notas.length; i++) {
+                System.out.print((i + 1) + "º nota: " + notas[i]);
+            }
+            System.out.printf("\nMédia final: %.1f", aluno.getMedia());
+
+            System.out.println();
+        }
+        imprimirAlunos(alunos);
+    }
+
+    public void imprimirAlunos(List<Aluno> alunos) {
+        int aprovados = 0;
+        int reprovados = 0;
+
+        System.out.println("\nAlunos aprovados: ");
+        for (Aluno aluno : alunos) {
+            if (aluno.getMedia() >= 6.0) {
+                System.out.println("Nome: " + aluno.getNome() + ", Média: " + aluno.getMedia());
+            aprovados++;
+            }else {
+                reprovados++;
+            }
+        }
+        System.out.println("\nAlunos reprovados: ");
+        for (Aluno aluno : alunos) {
+            if (aluno.getMedia() < 6.0) {
+                System.out.println("Nome: " + aluno.getNome() + ", Média: " + aluno.getMedia());
+            }
+        }
+        System.out.println("\nTotal aprovados: " + aprovados+
+                "\nTotal reprovados: "+ reprovados);
+
+    }
+
+}
+
+package atividade01_exercicio06.service;
+
+import atividade01_exercicio06.model.Aluno;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class ReceberDadosDoAluno {
+    Scanner sc = new Scanner(System.in);
+    List<Aluno> alunos = new ArrayList<>();
+
+    public List<Aluno> nomeDoAluno() {
+        while (true) {
+            System.out.println(" Digite o nome do Aluno: ");
+            String nome = sc.nextLine();
+
+            if (nome.equalsIgnoreCase("sair")) {
+                break;
+            }
+            int[] notas = new int[3];
+            float media = 0;
+            float soma = 0;
+            float mediaGeral = 0;
+            int divisor = 0;
+            boolean estado = false;
+
+            for (int i = 0; i < 3; i++) {
+                divisor += 1;
+                System.out.print("Digite a " + (i + 1) + "º Nota de " + nome + ": ");
+                notas[i] = sc.nextInt();
+                soma += notas[i];
+                media = soma/notas.length;
+
+                sc.nextLine();
+                mediaGeral += media;
+                mediaGeral /= divisor;
+
+            }
+            Aluno novoAluno = new Aluno(nome, notas, media, estado);
+            alunos.add(novoAluno);
+        }
+        return alunos;
+    }
+
+    public float medianaDaTurma() {
+        float somarMedias = 0;
+        for(Aluno aluno : alunos) {
+            somarMedias += aluno.getMedia();
+        }
+        return somarMedias;
+    }
+}
+
+package atividade01_exercicio06;
+
+import atividade01_exercicio06.model.Aluno;
+import atividade01_exercicio06.service.ImprimirDadosDoALuno;
+import atividade01_exercicio06.service.ReceberDadosDoAluno;
+
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        ReceberDadosDoAluno receberDadosDoAluno = new ReceberDadosDoAluno();
+        List<Aluno> alunos = receberDadosDoAluno.nomeDoAluno();
+        float mediaTurma = receberDadosDoAluno.medianaDaTurma();
+        System.out.printf("\nMédiaana da Turma %.2f\n", mediaTurma);
+
+        ImprimirDadosDoALuno imprimirDadosDoALuno = new ImprimirDadosDoALuno();
+        imprimirDadosDoALuno.lerDadosDoAluno(alunos);
+
+
+
+    }
+}
+
+
+//7o Crie um código que receba o cadastro de um cliente (nome, cpf, endereço, data de nascimento
+//e telefone) e o cadastro de livros (nome, autor, quantidade de páginas e editora). Permita que
+//os clientes possam pegar livros emprestados (data de empréstimo e data que deverá ser
+//devolvido) e, USANDO DTO, exiba o nome do cliente, nome do livro, data de empréstimo e
+//data de que deverá ser devolvido).
+
+
+package atividade01_exercicio07.entidades;
+
+
+import java.time.LocalDate;
+
+
+public class Cliente {
+    private String nome;
+    private String cpf;
+    private Endereco endereco;
+    private LocalDate dataDeNascimento;
+    private String telefone;
+    private Livros livros;
+    private DataEmprestimo emprestimo;
+
+    public Cliente() {}
+    public Cliente(String nome, String cpf, LocalDate dataDeNascimento, String telefone, Endereco endereco, Livros livros, DataEmprestimo emprestimo) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataDeNascimento = dataDeNascimento;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.livros = livros;
+        this.emprestimo = emprestimo;
+
+    }
+
+
+    public Cliente(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    public Endereco getEndereco() { return endereco; }
+    public Cliente(Livros livros) {
+        this.livros = livros;
+    }
+    public Livros getLivros() { return livros; }
+    public Cliente(DataEmprestimo emprestimo) { this.emprestimo = emprestimo; }
+    public DataEmprestimo getEmprestimo() { return emprestimo; }
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
+    }
+
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+}
+
+package atividade01_exercicio07.entidades;
+
+
+import java.time.LocalDate;
+
+public class DataEmprestimo {
+    private LocalDate dataSaida;
+    private LocalDate dataVolta;
+
+    public DataEmprestimo(LocalDate dataSaida, LocalDate dataVolta) {
+        this.dataSaida = dataSaida;
+        this.dataVolta = dataVolta;
+    }
+
+    public LocalDate getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(LocalDate dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    public LocalDate getDataVolta() {
+        return dataVolta;
+    }
+
+    public void setDataVolta(LocalDate dataVolta) {
+        this.dataVolta = dataVolta;
+    }
+}
+
+package atividade01_exercicio07.entidades;
+
+public class Endereco {
+    private String cep;
+    private String bairro;
+    private String rua;
+    private int numero;
+
+    public Endereco(String cep, String bairro, String rua, int numero) {
+        this.cep = cep;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+}
+
+package atividade01_exercicio07.entidades;
+
+public class Livros {
+    private String nome;
+    private String autor;
+    private int numeroDePaginas;
+    private String editora;
+
+
+    public Livros(String nome, String autor, int numeroDePaginas, String editora) {
+        this.nome = nome;
+        this.autor = autor;
+        this.numeroDePaginas = numeroDePaginas;
+        this.editora = editora;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public int getNumeroDePaginas() {
+        return numeroDePaginas;
+    }
+
+    public void setNumeroDePaginas(int numeroDePaginas) {
+        this.numeroDePaginas = numeroDePaginas;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+}
+
+package atividade01_exercicio07.serviceDTO;
+
+import java.time.LocalDate;
+
+public class EmprestimosDTO {
+    private String nomeDoCliente;
+    private String nomeDoLivro;
+    private LocalDate dataEmprestimo;
+    private LocalDate devolucao;
+
+    public EmprestimosDTO(String nomeDoCliente, String nomeDoLivro, LocalDate dataEmprestimo, LocalDate devolucao) {
+        this.nomeDoCliente = nomeDoCliente;
+        this.nomeDoLivro = nomeDoLivro;
+        this.dataEmprestimo = dataEmprestimo;
+        this.devolucao = devolucao;
+    }
+
+    public String getNomeDoCliente() {
+        return nomeDoCliente;
+    }
+
+    public void setNomeDoCliente(String nomeDoCliente) {
+        this.nomeDoCliente = nomeDoCliente;
+    }
+
+    public String getNomeDoLivro() {
+        return nomeDoLivro;
+    }
+
+    public void setNomeDoLivro(String nomeDoLivro) {
+        this.nomeDoLivro = nomeDoLivro;
+    }
+
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDevolucao() {
+        return devolucao;
+    }
+
+    public void setDevolucao(LocalDate dataDevolucao) {
+        this.devolucao = dataDevolucao;
+    }
+}
+
+package atividade01_exercicio07;
+
+import atividade01_exercicio07.entidades.Cliente;
+import atividade01_exercicio07.entidades.DataEmprestimo;
+import atividade01_exercicio07.entidades.Endereco;
+import atividade01_exercicio07.entidades.Livros;
+import atividade01_exercicio07.serviceDTO.EmprestimosDTO;
+
+import java.time.LocalDate;
+
+
+public class Main {
+    public static void main(String[] args) {
+        LocalDate dataSaida = LocalDate.now();
+        LocalDate dataVolta = dataSaida.plusMonths(1);
+
+        DataEmprestimo emprestimo = new DataEmprestimo(dataSaida, dataVolta);
+        Livros livros = new Livros("O dia do Curinga ", "Jostein Gaarder ", 341, "Schwarcz S.A. - São Paulo");
+        Endereco endereco = new Endereco("58800000 ", "Corda ", "Rua da Corda Bamba ", 3000);
+        Cliente cliente = new Cliente("Klébio Costa ", "00000000000 ", LocalDate.of(1500, 1, 1), "(83)99090-0000", endereco, livros, new DataEmprestimo(dataSaida, dataVolta));
+
+        EmprestimosDTO dto = new EmprestimosDTO(
+            cliente.getNome(),
+            cliente.getLivros().getNome(),
+            cliente.getEmprestimo().getDataSaida(),
+            cliente.getEmprestimo().getDataVolta()
+        );
+        System.out.println("Nome do Cliente: "+ dto.getNomeDoCliente());
+        System.out.println("Nome do livro: "+ dto.getNomeDoLivro());
+        System.out.println("Data do emprestimo: "+ dto.getDataEmprestimo());
+        System.out.println("Data de devolução: "+ dto.getDevolucao());
+    }
+}
+
+
